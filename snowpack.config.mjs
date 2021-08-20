@@ -15,5 +15,7 @@ export default {
   },
   packageOptions: {},
   devOptions: {},
-  buildOptions: {},
+  buildOptions: {
+    baseUrl: '.'
+  },
 };
