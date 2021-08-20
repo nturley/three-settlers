@@ -11,8 +11,7 @@ export default {
   ],
   routes: [],
   optimize: {
-    /* Example: Bundle your final build: */
-    // "bundle": true,
+    "bundle": true,
   },
   packageOptions: {},
   devOptions: {},
