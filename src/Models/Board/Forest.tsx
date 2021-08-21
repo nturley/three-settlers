@@ -24,7 +24,7 @@ type GLTFResult = GLTF & {
 
 export default function Model(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>()
-  const { nodes, materials } = useGLTF('../../grass_forest.glb') as GLTFResult
+  const { nodes, materials } = useGLTF('./grass_forest.glb') as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.Mesh_grass_forest.geometry} material={materials.dirt} />
@@ -65,4 +65,4 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('../../grass_forest.glb')
+useGLTF.preload('./grass_forest.glb')
