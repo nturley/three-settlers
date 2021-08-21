@@ -36,4 +36,4 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/stone_hill.glb')
+useGLTF.preload('../../stone_hill.glb')

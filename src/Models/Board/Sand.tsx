@@ -29,4 +29,4 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/sand.glb')
+useGLTF.preload('../../sand.glb')

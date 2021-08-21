@@ -65,4 +65,4 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/grass_forest.glb')
+useGLTF.preload('../../grass_forest.glb')

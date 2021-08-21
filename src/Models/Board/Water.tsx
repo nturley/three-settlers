@@ -26,4 +26,4 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/water.glb')
+useGLTF.preload('../../water.glb')
