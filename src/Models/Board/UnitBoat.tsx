@@ -6,6 +6,7 @@ import type * as THREE from 'three'
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
+import unit_boat from './unit_boat.glb'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -24,7 +25,7 @@ type GLTFResult = GLTF & {
 
 export default function Model(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>()
-  const { nodes, materials } = useGLTF('./unit_boat.glb') as GLTFResult
+  const { nodes, materials } = useGLTF(unit_boat) as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.unit_boat.geometry} material={nodes.unit_boat.material}>
@@ -75,4 +76,4 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('./unit_boat.glb')
+useGLTF.preload(unit_boat)

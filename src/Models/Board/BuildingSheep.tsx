@@ -6,6 +6,7 @@ import type * as THREE from 'three'
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
+import building_sheep from './building_sheep.glb'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -28,7 +29,7 @@ type GLTFResult = GLTF & {
 
 export default function Model(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>()
-  const { nodes, materials } = useGLTF('./building_sheep.glb') as GLTFResult
+  const { nodes, materials } = useGLTF(building_sheep) as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh geometry={nodes.Mesh_building_sheep.geometry} material={nodes.Mesh_building_sheep.material} />
@@ -85,4 +86,4 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('./building_sheep.glb')
+useGLTF.preload(building_sheep)
