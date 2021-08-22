@@ -122,19 +122,35 @@ const boatPositions: Array<{ pos: Vec3Tuple, rot: number }> = [
   { pos: [-6, 3, 3], rot: Math.PI / 6 },
 ]
 
-export function StaticBoard() {
+type StaticBoardCallback = (p: Vec3Tuple) => void
+
+interface StaticBoardEvents {
+  onGrassUp: StaticBoardCallback
+  onGrassEnter: StaticBoardCallback
+  onGrassLeave: StaticBoardCallback
+}
+
+export function StaticBoard({ onGrassUp, onGrassEnter, onGrassLeave }: StaticBoardEvents) {
   return <>
-    {grassPositions
-      .map(p => hexCoordinateToWorld(p, 0))
-      .map(p => <Grass position={p} key={`board ${p.toString()}`} />)
+    {
+      grassPositions
+        .map(p => <Grass
+          position={hexCoordinateToWorld(p, 0)}
+          key={`board ${p.toString()}`}
+          onPointerUp={() => onGrassUp(p)}
+          onPointerEnter={() => onGrassEnter(p)}
+          onPointerLeave={() => onGrassLeave(p)}
+        />)
     }
-    {waterPositions
-      .map(p => hexCoordinateToWorld(p, 0))
-      .map(p => <Water position={p} key={`board ${p.toString()}`} />)
+    {
+      waterPositions
+        .map(p => hexCoordinateToWorld(p, 0))
+        .map(p => <Water position={p} key={`board ${p.toString()}`} />)
     }
-    {boatPositions
-      .map(p => ({ pos: hexCoordinateToWorld(p.pos, .1), rot: p.rot }))
-      .map(p => <UnitBoat position={p.pos} key={`board b${p.pos.toString()}`} rotation={[0, p.rot, 0]} />)
+    {
+      boatPositions
+        .map(p => ({ pos: hexCoordinateToWorld(p.pos, .1), rot: p.rot }))
+        .map(p => <UnitBoat position={p.pos} key={`board b${p.pos.toString()}`} rotation={[0, p.rot, 0]} />)
     }
     <GridLines />
   </>
