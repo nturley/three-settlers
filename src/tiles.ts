@@ -1,12 +1,7 @@
-import BuildingFarm from './Models/Board/BuildingFarm';
-import BuildingSheep from './Models/Board/BuildingSheep';
-import Dirt from './Models/Board/Dirt';
-import Forest from './Models/Board/Forest';
+import _ from 'lodash';
 import type { Vec3Tuple } from './geometry';
-import Sand from './Models/Board/Sand';
-import StoneHill from './Models/Board/StoneHill';
 
-export type Tile =
+export type TileType =
   | 'Field'
   | 'Pasture'
   | 'Mountains'
@@ -14,8 +9,13 @@ export type Tile =
   | 'Desert'
   | 'Forest';
 
-export const tilePile: Tile[] = [
-  'Field',
+export interface Tile {
+  type: TileType;
+  num: number;
+  pos: Vec3Tuple;
+}
+
+const tilePile: TileType[] = [
   'Field',
   'Field',
   'Field',
@@ -23,6 +23,7 @@ export const tilePile: Tile[] = [
   'Clay',
   'Clay',
   'Clay',
+  'Forest',
   'Forest',
   'Forest',
   'Forest',
@@ -59,3 +60,17 @@ export const tilePositions: Vec3Tuple[] = [
   [0, 3, -3],
   [-2, 4, -2],
 ];
+
+const tileNumbers = [11, 3, 6, 5, 4, 9, 10, 8, 4, 11, 12, 9, 10, 8, 3, 6, 2, 5];
+
+export function generateTiles(): Tile[] {
+  let numIndex = -1;
+  return _.shuffle(tilePile).map((t, i) => {
+    if (t !== 'Desert') numIndex += 1;
+    return {
+      type: t,
+      num: t === 'Desert' ? 0 : tileNumbers[numIndex],
+      pos: tilePositions[i],
+    };
+  });
+}

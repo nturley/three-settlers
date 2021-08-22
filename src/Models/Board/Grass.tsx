@@ -23,7 +23,7 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF(grass) as GLTFResult
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null} >
       <mesh geometry={nodes.Mesh_grass.geometry} material={materials.dirt} />
       <mesh geometry={nodes.Mesh_grass_1.geometry} material={materials.grass} />
     </group>

@@ -1,10 +1,10 @@
 import React from 'react'
 import { HexTile } from './HexTile'
-import { Tile, tilePositions } from './tiles'
+import type { Tile } from './tiles'
 
 export function HexTilesBoard({ tiles }: { tiles: Tile[] }) {
   return <>
-    {tilePositions.map((pos, i) =>
-      <HexTile tile={tiles[i]} pos={pos} key={pos.toString()} />)}
+    {tiles.map((t) =>
+      <HexTile tile={t} key={t.pos.toString()} />)}
   </>
 }

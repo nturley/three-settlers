@@ -5,13 +5,13 @@ import { Environment, OrbitControls } from '@react-three/drei'
 
 import './App.css'
 import { StaticBoard } from './StaticBoard'
-import { tilePile } from './tiles'
+import { generateTiles } from './tiles'
 import { HexTilesBoard } from './HexTilesBoard'
 import _ from 'lodash'
 
 
 export default function App() {
-  const tiles = React.useMemo(() => _.shuffle(tilePile), [tilePile])
+  const tiles = React.useMemo(() => generateTiles(), [])
   return (
     <div className="App">
       <Canvas>

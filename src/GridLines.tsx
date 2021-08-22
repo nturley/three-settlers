@@ -27,6 +27,7 @@ export function GridLines() {
           dashOffset={.3}
           lineWidth={.5}
           points={points.map(p => hexCoordinateToWorld(p, 0.25))}
+          key={p.toString()}
         />
       )
     }
