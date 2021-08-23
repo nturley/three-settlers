@@ -6,6 +6,11 @@ export function placeSettlement(
   gameState: GameState,
   setGameState: (gs: GameState) => void,
 ) {
+  const playerIndex = gameState.players.findIndex(
+    (p) => p === gameState.whoseTurn,
+  );
+  const nextPlayer =
+    gameState.players[(playerIndex + 1) % gameState.players.length];
   const newSettlement: Settlement = {
     isCity: false,
     owner: gameState.whoseTurn,
@@ -20,6 +25,7 @@ export function placeSettlement(
     ...gameState,
     settlements: [...gameState.settlements, newSettlement],
     players,
+    whoseTurn: nextPlayer,
   });
 }
 
