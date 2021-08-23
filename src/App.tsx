@@ -5,33 +5,17 @@ import { Environment, OrbitControls } from '@react-three/drei'
 
 import './App.css'
 import { StaticBoard } from './StaticBoard'
-import { generateTiles } from './tiles'
 import { HexTilesBoard } from './HexTilesBoard'
 import _ from 'lodash'
 import { hexCoordinateToWorld, Vec3Tuple } from './geometry'
-import { Text } from '@react-three/drei'
 import BuildingVillage from './Models/Structures/BuildingVillage'
-import { fakeGameState, GameState, Player, Settlement } from './gameState'
-import TransparentVillage from './Models/Structures/TransparentVillage'
-
+import { fakeGameState, GameState, Settlement } from './gameState'
+import HoverSettlement from './HoverSettlement'
+import { placeSettlement, validFreeSettlePosition } from './settling'
 
 export default function App() {
   const [gameState, setGameState] = React.useState(fakeGameState())
   const [hoverPos, setHoverPos] = React.useState<Vec3Tuple | undefined>()
-
-  function placeSettlement(pos: Vec3Tuple) {
-    const newSettlement: Settlement = {
-      isCity: false,
-      owner: gameState.whoseTurn,
-      pos
-    }
-    const players = gameState.players.map(p => gameState.whoseTurn == p ? { ...p, settlements: [...p.settlements, newSettlement] } : p)
-    setGameState({
-      ...gameState,
-      settlements: [...gameState.settlements, newSettlement],
-      players
-    })
-  }
 
   return (
     <div className="App">
@@ -40,14 +24,12 @@ export default function App() {
           <Environment preset="sunset" background />
           <OrbitControls />
           <StaticBoard
-            onGrassClick={(p => placeSettlement(p))}
+            onGrassClick={(p => validFreeSettlePosition(p, gameState) && placeSettlement(p, gameState, setGameState))}
             onGrassEnter={p => setHoverPos(p)}
-            onGrassLeave={p => {
-              if (p == hoverPos) setHoverPos(undefined)
-            }}
+            onGrassLeave={p => { }}
           />
           <HexTilesBoard tiles={gameState.tiles} />
-          {hoverPos && <TransparentVillage position={hexCoordinateToWorld(hoverPos, 0)} roofColor={gameState.whoseTurn.color} />}
+          {hoverPos && <HoverSettlement hoverPos={hoverPos} gameState={gameState} />}
           {gameState.settlements.map(s => <BuildingVillage position={hexCoordinateToWorld(s.pos, 0)} roofColor={s.owner.color} />)}
         </Suspense>
       </Canvas>
