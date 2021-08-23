@@ -11,10 +11,28 @@ import _ from 'lodash'
 import { hexCoordinateToWorld, Vec3Tuple } from './geometry'
 import { Text } from '@react-three/drei'
 import BuildingVillage from './Models/Structures/BuildingVillage'
+import { fakeGameState, GameState, Player, Settlement } from './gameState'
+import TransparentVillage from './Models/Structures/TransparentVillage'
+
 
 export default function App() {
-  const tiles = React.useMemo(() => generateTiles(), [])
+  const [gameState, setGameState] = React.useState(fakeGameState())
   const [hoverPos, setHoverPos] = React.useState<Vec3Tuple | undefined>()
+
+  function placeSettlement(pos: Vec3Tuple) {
+    const newSettlement: Settlement = {
+      isCity: false,
+      owner: gameState.whoseTurn,
+      pos
+    }
+    const players = gameState.players.map(p => gameState.whoseTurn == p ? { ...p, settlements: [...p.settlements, newSettlement] } : p)
+    setGameState({
+      ...gameState,
+      settlements: [...gameState.settlements, newSettlement],
+      players
+    })
+  }
+
   return (
     <div className="App">
       <Canvas>
@@ -22,14 +40,15 @@ export default function App() {
           <Environment preset="sunset" background />
           <OrbitControls />
           <StaticBoard
-            onGrassUp={(p => console.log('up', p))}
+            onGrassClick={(p => placeSettlement(p))}
             onGrassEnter={p => setHoverPos(p)}
             onGrassLeave={p => {
               if (p == hoverPos) setHoverPos(undefined)
             }}
           />
-          <HexTilesBoard tiles={tiles} />
-          {hoverPos && <BuildingVillage position={hexCoordinateToWorld(hoverPos, 0)} />}
+          <HexTilesBoard tiles={gameState.tiles} />
+          {hoverPos && <TransparentVillage position={hexCoordinateToWorld(hoverPos, 0)} roofColor={gameState.whoseTurn.color} />}
+          {gameState.settlements.map(s => <BuildingVillage position={hexCoordinateToWorld(s.pos, 0)} roofColor={s.owner.color} />)}
         </Suspense>
       </Canvas>
     </div>

@@ -1,5 +1,5 @@
 import type { Vec3Tuple } from './geometry';
-import type { Tile } from './tiles';
+import { generateTiles, Tile } from './tiles';
 
 type DevelopmentCard = 'Soldier' | 'Monopoly' | 'Roads' | 'Resources';
 
@@ -12,18 +12,18 @@ type GamePhase =
   | 'Trade'
   | 'Build';
 
-interface Settlement {
+export interface Settlement {
   isCity: boolean;
   pos: Vec3Tuple;
   owner: Player;
 }
 
-interface Road {
+export interface Road {
   pos: Vec3Tuple;
   owner: Player;
 }
 
-interface GameState {
+export interface GameState {
   players: Player[];
   tiles: Tile[];
   cardDeck: DevelopmentCard[];
@@ -33,8 +33,9 @@ interface GameState {
   settlements: Settlement[];
 }
 
-interface Player {
+export interface Player {
   name: string;
+  color: string;
   resources: Resources;
   cards: DevelopmentCard[];
   roads: Road[];
@@ -47,4 +48,30 @@ interface Resources {
   ore: number;
   bricks: number;
   wheat: number;
+}
+
+export function fakeGameState(): GameState {
+  const player: Player = {
+    name: '',
+    color: 'green',
+    cards: [],
+    settlements: [],
+    roads: [],
+    resources: {
+      wheat: 0,
+      bricks: 0,
+      sheep: 0,
+      ore: 0,
+      wood: 0,
+    },
+  };
+  return {
+    players: [player],
+    cardDeck: [],
+    phase: 'Free Settlement 1',
+    tiles: generateTiles(),
+    whoseTurn: player,
+    settlements: [],
+    roads: [],
+  };
 }

@@ -125,19 +125,19 @@ const boatPositions: Array<{ pos: Vec3Tuple, rot: number }> = [
 type StaticBoardCallback = (p: Vec3Tuple) => void
 
 interface StaticBoardEvents {
-  onGrassUp: StaticBoardCallback
+  onGrassClick: StaticBoardCallback
   onGrassEnter: StaticBoardCallback
   onGrassLeave: StaticBoardCallback
 }
 
-export function StaticBoard({ onGrassUp, onGrassEnter, onGrassLeave }: StaticBoardEvents) {
+export function StaticBoard({ onGrassClick, onGrassEnter, onGrassLeave }: StaticBoardEvents) {
   return <>
     {
       grassPositions
         .map(p => <Grass
           position={hexCoordinateToWorld(p, 0)}
           key={`board ${p.toString()}`}
-          onPointerUp={() => onGrassUp(p)}
+          onClick={() => onGrassClick(p)}
           onPointerEnter={() => onGrassEnter(p)}
           onPointerLeave={() => onGrassLeave(p)}
         />)
