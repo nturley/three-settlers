@@ -39,10 +39,9 @@ type GLTFResult = GLTF & {
 export default function Model(props: JSX.IntrinsicElements['group'] & { roofColor: string }) {
   const group = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF(building_village) as GLTFResult
+
   return (
     <group ref={group} {...props} dispose={null}>
-      <mesh geometry={nodes.Mesh_building_village.geometry} material={nodes.Mesh_building_village.material} />
-      <mesh geometry={nodes.Mesh_building_village_1.geometry} material={materials.grass} />
       <group position={[-0.05, 0.2, -0.25]}>
         <mesh geometry={nodes.Mesh_building.geometry} material={nodes.Mesh_building.material} material-color={props.roofColor} />
         <mesh geometry={nodes.Mesh_building_1.geometry} material={nodes.Mesh_building_1.material} />

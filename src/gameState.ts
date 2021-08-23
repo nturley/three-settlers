@@ -53,6 +53,20 @@ interface Resources {
 export function fakeGameState(): GameState {
   const player: Player = {
     name: '',
+    color: 'white',
+    cards: [],
+    settlements: [],
+    roads: [],
+    resources: {
+      wheat: 0,
+      bricks: 0,
+      sheep: 0,
+      ore: 0,
+      wood: 0,
+    },
+  };
+  const player2: Player = {
+    name: '',
     color: 'green',
     cards: [],
     settlements: [],
@@ -66,7 +80,7 @@ export function fakeGameState(): GameState {
     },
   };
   return {
-    players: [player],
+    players: [player, player2],
     cardDeck: [],
     phase: 'Free Settlement 1',
     tiles: generateTiles(),

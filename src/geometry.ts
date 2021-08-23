@@ -11,3 +11,7 @@ export function hexCoordinateToWorld(
   const [x, y, z] = cubicPos;
   return [x * w + (z * w) / 2, height, z * h];
 }
+
+export function hexDistance(a: Vec3Tuple, b: Vec3Tuple) {
+  return a.reduce((acc, av, i) => acc + Math.abs(av - b[i]), 0) / 2;
+}
