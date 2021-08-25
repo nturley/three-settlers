@@ -18,7 +18,6 @@ import { HoverHex } from './HoverHex'
 export default function App() {
   const [gameState, setGameState] = React.useState(fakeGameState())
   const [hoverPos, setHoverPos] = React.useState<Vec3Tuple | undefined>()
-  const anchorPoint: Vec3Tuple = [0, -1, 1]
 
   return (
     <div className="App">
@@ -37,8 +36,8 @@ export default function App() {
           {gameState.settlements.map(s => <BuildingVillage position={hexCoordinateToWorld(s.pos, 0)} roofColor={s.owner.color} key={s.pos.toString()} />)}
 
           {hoverPos && <HoverSettlement hoverPos={hoverPos} gameState={gameState} />}
-          {hoverPos && <HoverRoad hoverPos={hoverPos} gameState={gameState} anchorPoint={anchorPoint} />}
-          {hoverPos && <HoverHex />}
+          {hoverPos && <HoverRoad hoverPos={hoverPos} gameState={gameState} anchorPoint={gameState.fromPoint} />}
+          {hoverPos && <HoverHex hoverPos={hoverPos} gameState={gameState} />}
         </Suspense>
       </Canvas>
     </div>

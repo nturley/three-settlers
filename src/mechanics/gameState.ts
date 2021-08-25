@@ -21,7 +21,7 @@ export interface Settlement {
 }
 
 export interface Road {
-  pos: Vec3Tuple;
+  pos: [Vec3Tuple, Vec3Tuple];
   owner: Player;
 }
 
@@ -33,6 +33,7 @@ export interface GameState {
   whoseTurn: Player;
   roads: Road[];
   settlements: Settlement[];
+  fromPoint: Vec3Tuple | undefined;
 }
 
 export interface Player {
@@ -89,5 +90,6 @@ export function fakeGameState(): GameState {
     whoseTurn: player,
     settlements: [],
     roads: [],
+    fromPoint: undefined,
   };
 }
