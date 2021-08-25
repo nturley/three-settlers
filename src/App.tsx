@@ -9,13 +9,16 @@ import { HexTilesBoard } from './HexTilesBoard'
 import _ from 'lodash'
 import { hexCoordinateToWorld, Vec3Tuple } from './geometry'
 import BuildingVillage from './Models/Structures/BuildingVillage'
-import { fakeGameState, GameState, Settlement } from './gameState'
+import { fakeGameState } from './mechanics/gameState'
 import HoverSettlement from './HoverSettlement'
-import { placeSettlement, validFreeSettlePosition } from './settling'
+import { onGrassClick } from './mechanics/gameActions'
+import { HoverRoad } from './HoverRoad'
+import { HoverHex } from './HoverHex'
 
 export default function App() {
   const [gameState, setGameState] = React.useState(fakeGameState())
   const [hoverPos, setHoverPos] = React.useState<Vec3Tuple | undefined>()
+  const anchorPoint: Vec3Tuple = [0, -1, 1]
 
   return (
     <div className="App">
@@ -24,13 +27,18 @@ export default function App() {
           <Environment preset="sunset" background />
           <OrbitControls />
           <StaticBoard
-            onGrassClick={(p => validFreeSettlePosition(p, gameState) && placeSettlement(p, gameState, setGameState))}
+            onGrassClick={(p => {
+              setGameState(onGrassClick(p, gameState))
+            })}
             onGrassEnter={p => setHoverPos(p)}
             onGrassLeave={p => { }}
           />
           <HexTilesBoard tiles={gameState.tiles} />
+          {gameState.settlements.map(s => <BuildingVillage position={hexCoordinateToWorld(s.pos, 0)} roofColor={s.owner.color} key={s.pos.toString()} />)}
+
           {hoverPos && <HoverSettlement hoverPos={hoverPos} gameState={gameState} />}
-          {gameState.settlements.map(s => <BuildingVillage position={hexCoordinateToWorld(s.pos, 0)} roofColor={s.owner.color} />)}
+          {hoverPos && <HoverRoad hoverPos={hoverPos} gameState={gameState} anchorPoint={anchorPoint} />}
+          {hoverPos && <HoverHex />}
         </Suspense>
       </Canvas>
     </div>

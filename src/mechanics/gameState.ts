@@ -1,13 +1,15 @@
-import type { Vec3Tuple } from './geometry';
-import { generateTiles, Tile } from './tiles';
+import type { Vec3Tuple } from '../geometry';
+import { generateTiles, Tile } from '../tiles';
 
 type DevelopmentCard = 'Soldier' | 'Monopoly' | 'Roads' | 'Resources';
 
 type GamePhase =
   | 'Free Settlement 1'
-  | 'Free Road 1'
+  | 'Free Road 1 from'
+  | 'Free Road 1 to'
   | 'Free Settlement 2'
-  | 'Free Road 2'
+  | 'Free Road 2 from'
+  | 'Free Road 2 to'
   | 'Rob'
   | 'Trade'
   | 'Build';

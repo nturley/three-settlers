@@ -1,16 +1,10 @@
 import type { GameState, Settlement } from './gameState';
-import { hexDistance, Vec3Tuple } from './geometry';
+import { hexDistance, Vec3Tuple } from '../geometry';
 
 export function placeSettlement(
   pos: Vec3Tuple,
   gameState: GameState,
-  setGameState: (gs: GameState) => void,
-) {
-  const playerIndex = gameState.players.findIndex(
-    (p) => p === gameState.whoseTurn,
-  );
-  const nextPlayer =
-    gameState.players[(playerIndex + 1) % gameState.players.length];
+): GameState {
   const newSettlement: Settlement = {
     isCity: false,
     owner: gameState.whoseTurn,
@@ -21,12 +15,11 @@ export function placeSettlement(
       ? { ...p, settlements: [...p.settlements, newSettlement] }
       : p,
   );
-  setGameState({
+  return {
     ...gameState,
     settlements: [...gameState.settlements, newSettlement],
     players,
-    whoseTurn: nextPlayer,
-  });
+  };
 }
 
 export function validFreeSettlePosition(
