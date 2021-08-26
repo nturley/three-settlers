@@ -14,8 +14,8 @@ import HoverSettlement from './HoverSettlement'
 import { onGrassClick } from './mechanics/gameActions'
 import { HoverRoad } from './HoverRoad'
 import { HoverHex } from './HoverHex'
-import StraightRoad from './Models/Structures/StraightRoad'
 import { SingleRoad } from './Models/Structures/SingleRoad'
+import { GiBrickPile, GiCardPlay, GiCardRandom, GiOre, GiSheep, GiWheat, GiWoodPile } from 'react-icons/gi'
 
 export default function App() {
   const [gameState, setGameState] = React.useState(fakeGameState())
@@ -23,6 +23,26 @@ export default function App() {
 
   return (
     <div className="App">
+      <div className="page">
+        {gameState.players.map(player =>
+          <>
+            <h2>{player.name}</h2>
+            Color: {player.color}
+            <table>
+              <thead><tr>
+                <th><GiBrickPile /></th><th><GiWoodPile /></th><th><GiWheat /></th><th><GiSheep /></th><th><GiOre /></th><th><GiCardPlay /></th>
+              </tr></thead>
+              <tbody><tr>
+                <td>{player.resources.bricks}</td><td>{player.resources.wood}</td><td>{player.resources.wheat}</td><td>{player.resources.sheep}</td><td>{player.resources.ore}</td><td>{player.cards.length}</td>
+              </tr></tbody>
+            </table>
+
+
+
+
+          </>
+        )}
+      </div>
       <Canvas>
         <Suspense fallback={null}>
           <Environment preset="sunset" background />
@@ -43,6 +63,6 @@ export default function App() {
           {hoverPos && <HoverHex hoverPos={hoverPos} gameState={gameState} />}
         </Suspense>
       </Canvas>
-    </div>
+    </div >
   )
 }
