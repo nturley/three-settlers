@@ -1,6 +1,6 @@
 import React from 'react'
 import { HexTile } from './HexTile'
-import type { Tile } from './tiles'
+import type { Tile } from '../tiles'
 
 export function HexTilesBoard({ tiles }: { tiles: Tile[] }) {
   return <>

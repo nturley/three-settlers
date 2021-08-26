@@ -1,12 +1,12 @@
 import React from 'react'
-import BuildingFarm from './Models/Board/BuildingFarm';
-import BuildingSheep from './Models/Board/BuildingSheep';
-import Dirt from './Models/Board/Dirt';
-import Forest from './Models/Board/Forest';
-import { hexCoordinateToWorld, Vec3Tuple } from './geometry';
-import Sand from './Models/Board/Sand';
-import StoneHill from './Models/Board/StoneHill';
-import type { Tile, TileType } from './tiles';
+import BuildingFarm from '../model-imports/Board/BuildingFarm';
+import BuildingSheep from '../model-imports/Board/BuildingSheep';
+import Dirt from '../model-imports/Board/Dirt';
+import Forest from '../model-imports/Board/Forest';
+import { hexCoordinateToWorld, Vec3Tuple } from '../geometry';
+import Sand from '../model-imports/Board/Sand';
+import StoneHill from '../model-imports/Board/StoneHill';
+import type { Tile, TileType } from '../tiles';
 import { Text } from '@react-three/drei'
 type HexComponent = (props: JSX.IntrinsicElements['group']) => JSX.Element;
 

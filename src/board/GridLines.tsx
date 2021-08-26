@@ -1,7 +1,7 @@
 import { Line } from '@react-three/drei'
 import React, { useRef } from 'react'
-import { hexCoordinateToWorld, Vec3Tuple } from './geometry'
-import { tilePositions } from './tiles'
+import { hexCoordinateToWorld, Vec3Tuple } from '../geometry'
+import { tilePositions } from '../tiles'
 
 
 const points: Vec3Tuple[] = [

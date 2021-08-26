@@ -1,7 +1,7 @@
 import React from 'react'
-import type { GameState } from './mechanics/gameState';
-import { hexCoordinateToWorld, hexDistance, Vec3Tuple } from './geometry';
-import TransparentRoad from './Models/Structures/TransparentRoad';
+import type { GameState } from '../../mechanics/gameState';
+import { hexCoordinateToWorld, hexDistance, Vec3Tuple } from '../../geometry';
+import TransparentRoad from '../../model-imports/Structures/TransparentRoad';
 
 export function HoverRoad({ hoverPos, gameState, anchorPoint }: { hoverPos: Vec3Tuple, gameState: GameState, anchorPoint: Vec3Tuple | undefined }) {
   if (anchorPoint) {

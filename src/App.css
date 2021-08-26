@@ -42,10 +42,16 @@ body,
 
 .page table {
   width: 100%;
+  border-collapse: collapse;
 }
 
 .page th,
 .page td {
   line-height: 1;
   text-align: center;
+}
+
+.page th {
+  border: 0px;
+  border-bottom: gray 2px solid;
 }

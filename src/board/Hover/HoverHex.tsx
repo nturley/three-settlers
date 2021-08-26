@@ -1,9 +1,9 @@
 import { Ring } from '@react-three/drei'
 import React from 'react'
-import { hexCoordinateToWorld, Vec3Tuple } from './geometry'
-import type { GameState } from './mechanics/gameState'
-import { validFreeRoad } from './mechanics/roads'
-import { validFreeSettlePosition } from './mechanics/settling'
+import { hexCoordinateToWorld, Vec3Tuple } from '../../geometry'
+import type { GameState } from '../../mechanics/gameState'
+import { validFreeRoad } from '../../mechanics/roads'
+import { validFreeSettlePosition } from '../../mechanics/settling'
 
 export function HoverHex({ hoverPos, gameState }: { hoverPos: Vec3Tuple, gameState: GameState }) {
   let color = gameState.whoseTurn.color

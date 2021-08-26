@@ -1,9 +1,9 @@
 
 import React from 'react'
-import Grass from './Models/Board/Grass'
-import { hexCoordinateToWorld, Vec3Tuple } from './geometry'
-import Water from './Models/Board/Water'
-import UnitBoat from './Models/Board/UnitBoat'
+import Grass from '../model-imports/Board/Grass'
+import { hexCoordinateToWorld, Vec3Tuple } from '../geometry'
+import Water from '../model-imports/Board/Water'
+import UnitBoat from '../model-imports/Board/UnitBoat'
 import { GridLines } from './GridLines'
 
 const grassPositions: Vec3Tuple[] = [
