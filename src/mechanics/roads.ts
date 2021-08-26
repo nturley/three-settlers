@@ -1,5 +1,5 @@
-import { hexDistance, Vec3Tuple } from 'src/geometry';
-import type { GameState } from './gameState';
+import { hexDistance, Vec3Tuple } from '../geometry';
+import type { GameState, Road } from './gameState';
 
 export function validRoadAnchor(pos: Vec3Tuple, gameState: GameState): boolean {
   if (
@@ -17,10 +17,23 @@ export function validRoadAnchor(pos: Vec3Tuple, gameState: GameState): boolean {
   return false;
 }
 
-export function validRoad(pos: Vec3Tuple, gameState: GameState): boolean {
+export function validFreeRoad(pos: Vec3Tuple, gameState: GameState): boolean {
   const fromPoint = gameState.fromPoint;
   if (fromPoint === undefined) return false;
-  if (hexDistance(gameState.whoseTurn.settlements[0].pos, pos) != 1)
+  const settlements = gameState.whoseTurn.settlements;
+  if (hexDistance(settlements[settlements.length - 1].pos, pos) != 1)
     return false;
   return true;
+}
+
+export function placeRoad(pos: Vec3Tuple, gameState: GameState): GameState {
+  if (gameState.fromPoint === undefined)
+    throw new Error('from point undefined');
+  const newRoad: Road = {
+    owner: gameState.whoseTurn,
+    pos: [gameState.fromPoint, pos],
+  };
+  gameState.roads.push(newRoad);
+  gameState.whoseTurn.roads.push(newRoad);
+  return gameState;
 }

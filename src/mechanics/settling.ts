@@ -10,15 +10,10 @@ export function placeSettlement(
     owner: gameState.whoseTurn,
     pos,
   };
-  const players = gameState.players.map((p) =>
-    gameState.whoseTurn == p
-      ? { ...p, settlements: [...p.settlements, newSettlement] }
-      : p,
-  );
+  gameState.whoseTurn.settlements.push(newSettlement);
   return {
     ...gameState,
     settlements: [...gameState.settlements, newSettlement],
-    players,
   };
 }
 

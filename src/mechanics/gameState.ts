@@ -3,16 +3,7 @@ import { generateTiles, Tile } from '../tiles';
 
 type DevelopmentCard = 'Soldier' | 'Monopoly' | 'Roads' | 'Resources';
 
-type GamePhase =
-  | 'Free Settlement 1'
-  | 'Free Road 1 from'
-  | 'Free Road 1 to'
-  | 'Free Settlement 2'
-  | 'Free Road 2 from'
-  | 'Free Road 2 to'
-  | 'Rob'
-  | 'Trade'
-  | 'Build';
+type GamePhase = 'Free Settlement' | 'Free Road' | 'Rob' | 'Trade' | 'Build';
 
 export interface Settlement {
   isCity: boolean;
@@ -55,7 +46,7 @@ interface Resources {
 
 export function fakeGameState(): GameState {
   const player: Player = {
-    name: '',
+    name: 'Bill',
     color: 'white',
     cards: [],
     settlements: [],
@@ -69,7 +60,7 @@ export function fakeGameState(): GameState {
     },
   };
   const player2: Player = {
-    name: '',
+    name: 'Jorge',
     color: 'green',
     cards: [],
     settlements: [],
@@ -85,7 +76,7 @@ export function fakeGameState(): GameState {
   return {
     players: [player, player2],
     cardDeck: [],
-    phase: 'Free Settlement 1',
+    phase: 'Free Settlement',
     tiles: generateTiles(),
     whoseTurn: player,
     settlements: [],

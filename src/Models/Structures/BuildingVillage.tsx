@@ -36,7 +36,7 @@ type GLTFResult = GLTF & {
   }
 }
 
-export default function Model(props: JSX.IntrinsicElements['group'] & { roofColor: string }) {
+export default function Settlement(props: JSX.IntrinsicElements['group'] & { roofColor: string }) {
   const group = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF(building_village) as GLTFResult
 

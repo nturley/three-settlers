@@ -19,7 +19,7 @@ type GLTFResult = GLTF & {
   }
 }
 
-export default function RoadStraight(props: JSX.IntrinsicElements['group'] & { playerColor: string }) {
+export default function TransparentRoad(props: JSX.IntrinsicElements['group'] & { playerColor: string }) {
   const group = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF(path_straight) as GLTFResult
   const playerMaterials: Record<string, THREE.Material> = React.useMemo(() => ({
