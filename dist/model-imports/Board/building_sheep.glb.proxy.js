@@ -1,0 +1,1 @@
+export default "./dist/model-imports/Board/building_sheep.glb";

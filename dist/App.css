@@ -1,0 +1,57 @@
+html,
+body,
+#root,
+.App {
+  height: 100%;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+@font-face {
+  font-family: 'Allison-Regular';
+  src: url('https://neilturley.dev/game-assets/Allison-Regular.ttf');
+}
+
+.page {
+  background-color: #f8f5de;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 210, 0, 0.4),
+    rgba(200, 160, 0, 0.1) 11%,
+    rgba(0, 0, 0, 0) 35%,
+    rgba(200, 160, 0, 0.1) 65%
+  );
+  box-shadow: inset 0 0 75px rgba(255, 210, 0, 0.3),
+    inset 0 0 20px rgba(255, 210, 0, 0.4), inset 0 0 30px rgba(220, 120, 0, 0.8);
+  color: rgba(0, 0, 0, 0.5);
+  font-family: 'Allison-Regular';
+  font-size: 24px;
+  font-weight: bold;
+  width: 250px;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  padding: 30px;
+}
+
+.page h2 {
+  margin: 0px;
+}
+
+.page table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.page th,
+.page td {
+  line-height: 1;
+  text-align: center;
+}
+
+.page th {
+  border: 0px;
+  border-bottom: gray 2px solid;
+}

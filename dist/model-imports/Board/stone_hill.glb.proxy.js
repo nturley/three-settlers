@@ -1,0 +1,1 @@
+export default "./dist/model-imports/Board/stone_hill.glb";

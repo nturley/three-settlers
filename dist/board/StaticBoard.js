@@ -1,0 +1,127 @@
+import React from "../../_snowpack/pkg/react.js";
+import Grass from "../model-imports/Board/Grass.js";
+import {hexCoordinateToWorld} from "../geometry.js";
+import Water from "../model-imports/Board/Water.js";
+import UnitBoat from "../model-imports/Board/UnitBoat.js";
+import {GridLines} from "./GridLines.js";
+const grassPositions = [
+  [1, 0, -1],
+  [1, -1, 0],
+  [0, 1, -1],
+  [0, -1, 1],
+  [-1, 0, 1],
+  [-1, 1, 0],
+  [2, 0, -2],
+  [2, -2, 0],
+  [-2, 2, 0],
+  [-2, 0, 2],
+  [0, 2, -2],
+  [0, -2, 2],
+  [3, -2, -1],
+  [3, -1, -2],
+  [-3, 1, 2],
+  [-3, 2, 1],
+  [1, 2, -3],
+  [1, -3, 2],
+  [-1, -2, 3],
+  [-1, 3, -2],
+  [2, 1, -3],
+  [2, -3, 1],
+  [-2, -1, 3],
+  [-2, 3, -1],
+  [4, -1, -3],
+  [4, -3, -1],
+  [3, 1, -4],
+  [3, -4, 1],
+  [1, 3, -4],
+  [1, -4, 3],
+  [-4, 1, 3],
+  [-4, 3, 1],
+  [-3, -1, 4],
+  [-3, 4, -1],
+  [-1, -3, 4],
+  [-1, 4, -3],
+  [4, 0, -4],
+  [4, -4, 0],
+  [-4, 0, 4],
+  [-4, 4, 0],
+  [0, 4, -4],
+  [0, -4, 4],
+  [3, 2, -5],
+  [2, 3, -5],
+  [-5, 2, 3],
+  [-5, 3, 2],
+  [3, -5, 2],
+  [2, -5, 3],
+  [5, -2, -3],
+  [5, -3, -2],
+  [-2, -3, 5],
+  [-3, -2, 5],
+  [-2, 5, -3],
+  [-3, 5, -2]
+];
+const waterPositions = [
+  [6, -3, -3],
+  [-6, 3, 3],
+  [-3, 6, -3],
+  [3, -6, 3],
+  [-3, -3, 6],
+  [3, 3, -6],
+  [6, -4, -2],
+  [6, -2, -4],
+  [-6, 4, 2],
+  [-6, 2, 4],
+  [4, 2, -6],
+  [4, -6, 2],
+  [-4, 6, -2],
+  [-4, -2, 6],
+  [2, 4, -6],
+  [2, -6, 4],
+  [-2, -4, 6],
+  [-2, 6, -4],
+  [5, 0, -5],
+  [5, -5, 0],
+  [-5, 0, 5],
+  [-5, 5, 0],
+  [0, 5, -5],
+  [0, -5, 5],
+  [-5, 1, 4],
+  [-5, 4, 1],
+  [5, -1, -4],
+  [5, -4, -1],
+  [1, -5, 4],
+  [1, 4, -5],
+  [-1, 5, -4],
+  [-1, -4, 5],
+  [4, -5, 1],
+  [4, 1, -5],
+  [-4, 5, -1],
+  [-4, -1, 5]
+];
+const boatPositions = [
+  {pos: [-4, -1, 5], rot: Math.PI / 2},
+  {pos: [-1, -4, 5], rot: Math.PI / 2},
+  {pos: [3, -6, 3], rot: -Math.PI / 6},
+  {pos: [5, -4, -1], rot: Math.PI / 6},
+  {pos: [5, -1, -4], rot: Math.PI / 6},
+  {pos: [3, -1, -6], rot: Math.PI / 2},
+  {pos: [-1, 5, -4], rot: -Math.PI / 6},
+  {pos: [-4, 5, -1], rot: -Math.PI / 6},
+  {pos: [-6, 3, 3], rot: Math.PI / 6}
+];
+export function StaticBoard({onGrassClick, onGrassEnter, onGrassLeave}) {
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, grassPositions.map((p) => /* @__PURE__ */ React.createElement(Grass, {
+    position: hexCoordinateToWorld(p, 0),
+    key: `board ${p.toString()}`,
+    onClick: () => onGrassClick(p),
+    onPointerEnter: () => onGrassEnter(p),
+    onPointerLeave: () => onGrassLeave(p)
+  })), waterPositions.map((p) => hexCoordinateToWorld(p, 0)).map((p) => /* @__PURE__ */ React.createElement(Water, {
+    position: p,
+    key: `board ${p.toString()}`
+  })), boatPositions.map((p) => ({pos: hexCoordinateToWorld(p.pos, 0.1), rot: p.rot})).map((p) => /* @__PURE__ */ React.createElement(UnitBoat, {
+    position: p.pos,
+    key: `board b${p.pos.toString()}`,
+    rotation: [0, p.rot, 0]
+  })), /* @__PURE__ */ React.createElement(GridLines, null));
+}
