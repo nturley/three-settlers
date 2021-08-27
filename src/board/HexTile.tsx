@@ -42,7 +42,7 @@ const Billboard = React.forwardRef<Mesh, BillboardProps>(function Billboard(
     if (lockY) localRef.current.rotation.y = prevRotation.y
     if (lockZ) localRef.current.rotation.z = prevRotation.z
   })
-  return <group ref={mergeRefs([localRef, ref])} {...props} />
+  return <group ref={mergeRefs([localRef, ref])} {...props as any} />
 })
 
 export function HexTile(props: JSX.IntrinsicElements['group'] & { tile: Tile }) {
